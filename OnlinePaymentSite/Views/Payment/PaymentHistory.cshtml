@@ -1,0 +1,50 @@
+﻿@model OnlinePaymentSite.Web.ViewModels.Payment.PaymentHistoryViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Payment History</h2>
+        <form asp-action="History" method="get" class="mb-3">
+            <div class="mb-3">
+                <label for="accountId" class="form-label">Select Account</label>
+                <select name="accountId" class="form-control" onchange="this.form.submit()">
+                    <option value="0">-- Select Account --</option>
+                    @foreach (var account in ViewBag.Accounts as List<OnlinePaymentSite.Services.DTOs.Account.AccountInfo>)
+                    {
+                        <option value="@account.AccountId" selected="@(account.AccountId == Model.SelectedAccountId)">@account.AccountNumber</option>
+                    }
+                </select>
+            </div>
+        </form>
+
+        @if (Model.Payments.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>From Account</th>
+                        <th>To Account</th>
+                        <th>Amount</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var payment in Model.Payments)
+                    {
+                        <tr>
+                            <td>@payment.PaymentDate.ToString("g")</td>
+                            <td>@payment.FromAccountNumber</td>
+                            <td>@payment.ToAccountNumber</td>
+                            <td>$@payment.Amount.ToString("F2")</td>
+                            <td>@payment.Reason</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if (Model.SelectedAccountId != 0)
+        {
+            <p>No payments found for the selected account.</p>
+        }
+    </div>
+</div>

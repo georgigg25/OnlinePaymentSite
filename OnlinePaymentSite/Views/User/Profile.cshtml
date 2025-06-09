@@ -1,0 +1,43 @@
+﻿@model OnlinePaymentSite.Web.ViewModels.User.UserProfileViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>User Profile</h2>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <h3>Update Full Name</h3>
+        <form asp-action="UpdateFullName" method="post">
+            <input type="hidden" asp-for="UserId" />
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Username" class="form-control" readonly />
+            </div>
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Full Name</button>
+        </form>
+
+        <h3 class="mt-4">Change Password</h3>
+        <form asp-action="UpdatePassword" method="post">
+            <input type="hidden" name="UserId" value="@Model.UserId" />
+            <div class="mb-3">
+                <label for="NewPassword" class="form-label">New Password</label>
+                <input type="password" name="NewPassword" class="form-control" />
+                <span asp-validation-for="@(new OnlinePaymentSite.Web.ViewModels.User.UpdatePasswordViewModel().NewPassword)" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" name="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="@(new OnlinePaymentSite.Web.ViewModels.User.UpdatePasswordViewModel().ConfirmPassword)" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

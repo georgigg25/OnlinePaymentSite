@@ -1,0 +1,14 @@
+﻿@model OnlinePaymentSite.Services.DTOs.Account.GetAccountResponse
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Account Details</h2>
+        <dl class="row">
+            <dt class="col-sm-3">Account Number</dt>
+            <dd class="col-sm-9">@Model.AccountNumber</dd>
+            <dt class="col-sm-3">Balance</dt>
+            <dd class="col-sm-9">$@Model.Balance.ToString("F2")</dd>
+        </dl>
+        <a asp-action="Index" class="btn btn-primary">Back to Accounts</a>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@model OnlinePaymentSite.Services.DTOs.Account.GetAllAccountsResponse
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>My Accounts</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in Model.Accounts)
+                {
+                    <tr>
+                        <td>@account.AccountNumber</td>
+                        <td>$@account.Balance.ToString("F2")</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@account.AccountId" class="btn btn-sm btn-info">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
